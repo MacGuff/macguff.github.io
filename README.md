@@ -13,13 +13,13 @@
 2. `hexo g;hexo s`本地预览效果
 
 ## 发布到github
-1. 在github新建一个repo,要求名字格式必须为 **你的github用户名.github.io**
+1. 在github新建一个repo,新建分支gh-pages
 2. 打开博客根目录下的_config.yml文件，修改最后一行的配置：
    ```
    deploy:
      type: git
      repository: https://github.com/MacGuff/macguff.github.io
-     branch: master
+     branch: gh-pages
    ```
    repository修改为你自己的github项目地址
 3. `hexo d`发布,访问[macguff.github.io][github-page]
