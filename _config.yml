@@ -100,4 +100,4 @@ theme: yinwang
 deploy:
   type: git
   repository: https://github.com/MacGuff/macguff.github.io.git
-  branch: gh-pages
+  branch: master
