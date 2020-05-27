@@ -1,4 +1,4 @@
-个人博客源码-<macguff.github.io>
+个人博客源码-[macguff.github.io][github-page]
 
 ## 安装Hexo
 1. npm i hexo-cli -g,若报错，用root身份运行
@@ -22,4 +22,6 @@
      branch: master
    ```
    repository修改为你自己的github项目地址
-   3 hexo d发布
+3. hexo d发布,访问[macguff.github.io][github-page]
+
+[github-page]: https://macguff.github.io/
