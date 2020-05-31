@@ -81,7 +81,7 @@ cat >> index.html << eof
                     </li>
                 
                     <li >
-                        <a href="https:github.com/macguff" target="_blank" rel="noopener"> GitHub</a>
+                        <a href="https://github.com/macguff" target="_blank" rel="noopener"> GitHub</a>
                     </li>
                 
             
