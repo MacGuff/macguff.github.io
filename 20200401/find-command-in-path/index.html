@@ -2,7 +2,7 @@
 <head>
 	
 	<title>检查命令是否安装</title>
-	<meta name="keywords" content="fzb.me,冯宗宝,冯宗宝的blog" />
+	<meta name="keywords" content="blog" />
 
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -32,7 +32,7 @@
 <meta name="generator" content="Hexo 4.2.1"></head>
 
 <body>
-
+ 
 
 <h2 class="title">检查命令是否安装</h2>
 <!---
@@ -47,7 +47,7 @@
 --->
 </div>
 <!--
-<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#hash"><span class="toc-text">hash</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#command"><span class="toc-text">command</span></a></li></ol>
+<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#hash"><span class="toc-text">hash</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#command"><span class="toc-text">command</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#which"><span class="toc-text">which</span></a></li></ol>
 -->
 <p>有时我们需要确定一个命令是否在当前的系统已经安装，并且可以直接通过名字调用。比如我们写了一个JAVA应用，给用户提供的启动脚本里，可能需要做这样的检测：</p>
 <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">cmd=java</span><br><span class="line"><span class="keyword">for</span> p <span class="keyword">in</span> <span class="variable">$&#123;PATH//:/ &#125;</span>; <span class="keyword">do</span></span><br><span class="line">	<span class="keyword">if</span> <span class="built_in">test</span> -f <span class="variable">$p</span>/<span class="variable">$cmd</span>; <span class="keyword">then</span></span><br><span class="line">		<span class="built_in">echo</span> <span class="string">"java is: <span class="variable">$p</span>/<span class="variable">$cmd</span>"</span></span><br><span class="line">		<span class="built_in">exit</span> 0</span><br><span class="line">	<span class="keyword">fi</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"java is not installed"</span></span><br><span class="line"><span class="built_in">exit</span> 1</span><br></pre></td></tr></table></figure>
@@ -55,8 +55,11 @@
 <h3 id="hash"><a href="#hash" class="headerlink" title="hash"></a>hash</h3><p>shell将命令的完整路径存在一个内部的hash表里（避免每次执行命令都去搜索PATH路径列表）<code>hash</code> cmd会执行这一操作，如果命令不存在于PATH，返回失败，因此我们可以用它来检查。</p>
 <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> <span class="built_in">hash</span> java &gt; /dev/null 2&gt;&amp;1; <span class="keyword">then</span></span><br><span class="line">	<span class="built_in">echo</span> <span class="string">"java is available"</span></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="command"><a href="#command" class="headerlink" title="command"></a>command</h3><p><code>command</code>命令被用来显式执行外部命令，而不是选择一个同名的内部命令，它会执行PATH搜索，<br>因此我们也可以用它来检查。</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> <span class="built_in">command</span> -v java &gt;/sed/null 2&gt;&amp;1; <span class="keyword">then</span></span><br><span class="line">	ehco <span class="string">"java is available"</span></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+<h3 id="command"><a href="#command" class="headerlink" title="command"></a>command</h3><p><code>command</code>命令的-v选项会跳过函数，它也会执行PATH搜索，<br>因此我们也可以用它来检查。</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> <span class="built_in">command</span> -v java &gt;/dev/null 2&gt;&amp;1; <span class="keyword">then</span></span><br><span class="line">	ehco <span class="string">"java is available"</span></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="which"><a href="#which" class="headerlink" title="which"></a>which</h3><p>which命令会搜索路径，同样可以达到目的。</p>
+
 
 <!--<a href="http://yoursite.com/20200401/find-command-in-path/#disqus_thread" class="article-comment-link">Comments</a>
 <div id="disqus_thread"></div>
