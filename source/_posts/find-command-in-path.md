@@ -26,10 +26,13 @@ fi
 ```
 
 ### command
-`command`命令被用来显式执行外部命令，而不是选择一个同名的内部命令，它会执行PATH搜索，
+`command`命令的-v选项会跳过函数，它也会执行PATH搜索，
 因此我们也可以用它来检查。
 ```sh
-if command -v java >/sed/null 2>&1; then
+if command -v java >/dev/null 2>&1; then
 	ehco "java is available"
 fi
 ```
+
+### which
+which命令会搜索路径，同样可以达到目的。

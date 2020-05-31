@@ -1,4 +1,4 @@
-<% if (post && index){ %>
+ <% if (post && index){ %>
 <li class="list-group-item title">
 	<div class="date"><%- date(post.date, 'YYYY年M月D日') %></div>
     <a href="<%- url_for(post.path)%>"><%= post.title%></a>

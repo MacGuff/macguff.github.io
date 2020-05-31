@@ -5,7 +5,7 @@ version: 3.0
 favicon: /favicon.ico
 
 # Set default keywords (Use a comma to separate)
-keywords: fzb.me,冯宗宝,冯宗宝的blog 
+keywords: blog 
 
 # Code Highlight theme
 # Available value: normal | night | night eighties | night blue | night bright
@@ -19,10 +19,9 @@ menu:
   #archives: /archives
   #tags: /tags
   Notes: /notes
-  Beanstalkd: /beanstalkd
-  About: /about
+  #About: /about
   #致莫急: /a-letter-to-mr-moji
-  GitHub: https:github.com/mickeyouyou
+  GitHub: https:github.com/macguff
 
 
 
