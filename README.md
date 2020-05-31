@@ -13,7 +13,7 @@
 2. `hexo g;hexo s`本地预览效果
 
 ## 发布到github
-1. 在github新建一个repo,新建分支gh-pages
+1. 在github新建一个repo,名字必须为 github-username.github.io
 2. 打开博客根目录下的_config.yml文件，修改最后一行的配置：
    ```
    deploy:
