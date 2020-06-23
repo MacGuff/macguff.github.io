@@ -1,0 +1,52 @@
+:imagesdir: assets/images
+
+== api使用
+
+=== 预备
+
+. 全局命令
+
+keys *:: 查看所有键
+dbsize:: 键总数
+exists:: 键是否存在
+del:: 删除键，存在返回1,不存在返回0,可以删除多个键
++
+[source]
+----
+127.0.0.1:6379> del not_exist_key
+(integer) 0
+127.0.0.1:6379> set a 1
+OK
+127.0.0.1:6379> set b 2
+OK
+127.0.0.1:6379> set c 3
+OK
+127.0.0.1:6379> del a b c
+(integer) 3
+----
+expire::
+键过期 +
+`ttl`命令返回键过期时间，有三种返回值： +
+大于0：键剩余的过期时间 +
+-1：键没有设置过期时间 +
+-2：键不存在
++
+----
+127.0.0.1:6379> set a 1
+OK
+127.0.0.1:6379> expire a 100
+(integer) 1
+127.0.0.1:6379> ttl a
+(integer) 90
+127.0.0.1:6379> ttl a
+(integer) 87
+127.0.0.1:6379> del a
+(integer) 1
+127.0.0.1:6379> ttl a
+(integer) -2
+----
+type:: 键的数据结构类型
+
+. 数据结构和内部编码
+
+image::redis-2-2.png[]

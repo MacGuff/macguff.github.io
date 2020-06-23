@@ -5,6 +5,10 @@ notes_dir=$base_dir/notes
 #source_dir=$base_dir/source
 notes_dir_out=$base_dir/public/notes
 
+
+color_echo() {
+    echo -e "\e[31m"$1"\e[0m"
+}
 echo "start build notes..."
 echo
 
@@ -12,18 +16,20 @@ cd $notes_dir
 rm -rf $notes_dir_out
 
 for book in *; do
-    if [ -d $book ]; then
+    if [[ -d $book ]]; then
         mkdir -p $notes_dir_out/$book
-        (cd $book
+        (
+        cd $book
         echo "start build $book..."
-        ./build.sh $notes_dir_out/$book
+        ../build.sh $notes_dir_out/$book || color_echo "build $book faild!"
+        echo
         )
     fi
 done
 
 # 生成notes/index.html
 
-cat >> index.html << eof
+cat > index.html << eof
 <html>
 <head>
 	
@@ -51,7 +57,8 @@ cat >> index.html << eof
     
     
 
-<meta name="generator" content="Hexo 4.2.1"></head>
+<meta name="generator" content="Hexo 4.2.1">
+</head>
 
 <body>
 <nav class="navbar navbar-default navbar-fixed-top" style="opacity: .9" role="navigation">
@@ -95,16 +102,14 @@ cat >> index.html << eof
         <div class="col-md-2"></div>
         <div class="col-md-8 col-sm-12">
             <div class="panel panel-default">
-eof
 
-cat >> index.html << eof
                 <ul class="list-group">
                     
                     
                      
 <li class="list-group-item title">
 	<div class="date">2020年5月28日</div>
-    <a href="mysql/" target="_blank">mysql读书笔记</a>
+    <a href="mysql/" target="_blank">高性能MYSQL</a>
 </li>
 
 
@@ -112,16 +117,15 @@ cat >> index.html << eof
                      
 <li class="list-group-item title">
 	<div class="date">2020年4月1日</div>
-    <a href="think-in-java/" target="_blank">java编程思想</a>
+    <a href="apue/" target="_blank">UNIX编程环境</a>
 </li>
 
-
-                    
-                    
+<li class="list-group-item title">
+	<div class="date">2020年4月1日</div>
+    <a href="redis-devops/" target="_blank">Redis</a>
+</li>                   
                 </ul>
-eof
 
-cat >> index.html << eof
             </div>
         </div>
 
@@ -139,14 +143,9 @@ cat >> index.html << eof
 <script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 
-
-
 </body>
 </html>
 eof
 cp -rf index.html $notes_dir_out/index.html
 
 rm -rf *.html
-
-echo
-echo "build all notes ok!"

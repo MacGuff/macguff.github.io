@@ -3,10 +3,6 @@ D瓜哥 <https://www.diguage.com/>
 {docdate}
 include::_attributes.adoc[]
 
-++++
-include::analytics.htm[]
-++++
-
 :sectnums!:
 
 include::preface.adoc[]
