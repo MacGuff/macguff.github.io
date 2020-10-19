@@ -12,8 +12,8 @@
 :linkcss:
 :docinfo:
 :toc-title: 目录
-:toclevels: 1
-:sectnumlevels: 1
+:toclevels: 2
+:sectnumlevels: 2
 :sectnums:
 :preface-title: 前言
 :chapter-label: 章

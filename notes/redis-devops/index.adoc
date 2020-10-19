@@ -4,3 +4,5 @@ MacGuff <https://macguff.github.io>
 include::_attributes.adoc[]
 
 include::api.adoc[]
+
+include::other-features.adoc[]

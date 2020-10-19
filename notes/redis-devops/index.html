@@ -19,12 +19,27 @@
 <div class="details">
 <span id="author" class="author">MacGuff</span><br>
 <span id="email" class="email"><a href="https://macguff.github.io" class="bare">https://macguff.github.io</a></span><br>
-<span id="revdate">2020-06-24</span>
+<span id="revdate">2020-06-30</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">目录</div>
 <ul class="sectlevel1">
-<li><a href="#_api使用">1. api使用</a></li>
+<li><a href="#_api使用">1. api使用</a>
+<ul class="sectlevel2">
+<li><a href="#_预备">1.1. 预备</a></li>
+<li><a href="#_字符串string">1.2. 字符串（string）</a></li>
+<li><a href="#_哈希hash">1.3. 哈希（hash）</a></li>
+<li><a href="#_列表list">1.4. 列表（list）</a></li>
+<li><a href="#_集合set">1.5. 集合（set）</a></li>
+<li><a href="#_有序集合zset">1.6. 有序集合(zset)</a></li>
+<li><a href="#_键管理">1.7. 键管理</a></li>
+</ul>
+</li>
+<li><a href="#_小功能大用处">2. 小功能大用处</a>
+<ul class="sectlevel2">
+<li><a href="#_慢查询">2.1. 慢查询</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -33,7 +48,7 @@
 <h2 id="_api使用">1. api使用</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_预备">预备</h3>
+<h3 id="_预备">1.1. 预备</h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -103,13 +118,460 @@ OK
 </li>
 <li>
 <p>数据结构和内部编码</p>
+<div class="imageblock">
+<div class="content">
+<img src="assets/images/redis-2-2.png" alt="redis-data-structure">
+</div>
+</div>
+</li>
+<li>
+<p>单线程架构</p>
+<div class="ulist">
+<ul>
+<li>
+<p>单线程模型，不存在并发问题</p>
+</li>
+<li>
+<p>为什么单线程能这么快？</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>纯内存访问</p>
+</li>
+<li>
+<p>非阻塞I/O</p>
+</li>
+<li>
+<p>单线程避免了线程切换和竞态产生的开销</p>
 </li>
 </ol>
 </div>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+如果某个命令执行过长，会阻塞其他命令，对于Redis这种高性能的服务来说是致命的。
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_字符串string">1.2. 字符串（string）</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>set</code></p>
+<div class="listingblock">
+<div class="content">
+<pre>127.0.0.1:6379&gt; set hello world
+OK
+127.0.0.1:6379&gt; setnx hello redis
+(integer) 0
+127.0.0.1:6379&gt; set hello jedis xx
+OK
+127.0.0.1:6379&gt; set hello jedis nx
+(nil)</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>setnx可实现分布式锁： <a href="http://redis.io/topics/distlock" class="bare">http://redis.io/topics/distlock</a></p>
+</div>
+</li>
+<li>
+<p><code>get</code></p>
+<div class="listingblock">
+<div class="content">
+<pre>127.0.0.1:6379&gt; set hello redis
+OK
+127.0.0.1:6379&gt; get hello
+"redis"
+127.0.0.1:6379&gt; get not-exists
+(nil)</pre>
+</div>
+</div>
+</li>
+<li>
+<p>批量</p>
+<div class="listingblock">
+<div class="content">
+<pre>127.0.0.1:6379&gt; mset a 1 b 2 c 3
+OK
+127.0.0.1:6379&gt; mget a b c
+1) "1"
+2) "2"
+3) "3"</pre>
+</div>
+</div>
+</li>
+<li>
+<p><code>incr</code></p>
+<div class="listingblock">
+<div class="content">
+<pre>127.0.0.1:6379&gt; exists a
+(integer) 0
+127.0.0.1:6379&gt; incr a
+(integer) 1
+127.0.0.1:6379&gt; set b 10
+OK
+127.0.0.1:6379&gt; incr b
+(integer) 11
+127.0.0.1:6379&gt; decr a
+(integer) 0
+127.0.0.1:6379&gt; decr a
+(integer) -1</pre>
+</div>
+</div>
+</li>
+<li>
+<p>其他命令</p>
+<div class="listingblock">
+<div class="content">
+<pre>append key value
+strlen key
+setrange key offset value
+getrange key start end</pre>
+</div>
+</div>
+</li>
+<li>
+<p>典型使用场景</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>缓存</p>
+</li>
+<li>
+<p>计数</p>
+</li>
+<li>
+<p>session</p>
+</li>
+<li>
+<p>限速</p>
+<div class="listingblock">
+<div class="title">代码 1. 伪代码</div>
+<div class="content">
+<pre>phone="128xxxxxxxxxx"
+key = "shortmsg:limit:" + phone
+isexists = redis.set(key, 1, "ex 60", ”nx“)
+if (isexists != null || redis.incr(key) &lt;= 5) {
+    // 通过
+} else {
+    // 限速
+}</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_哈希hash">1.3. 哈希（hash）</h3>
 <div class="imageblock">
 <div class="content">
-<img src="assets/images/redis-2-2.png" alt="redis 2 2">
+<img src="assets/images/redis-2-3.png" alt="redis-hash">
 </div>
+<div class="title">图 1. redis hash</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_列表list">1.4. 列表（list）</h3>
+<div class="imageblock">
+<div class="content">
+<img src="assets/images/redis-2-4.png" alt="redis-list">
+</div>
+</div>
+<div class="listingblock">
+<div class="title">代码 2. 列表操作</div>
+<div class="content">
+<pre>127.0.0.1:6379&gt; flushall
+OK
+127.0.0.1:6379&gt; rpush mylist  c  b a
+(integer) 3
+127.0.0.1:6379&gt; lrange mylist 0 -1
+1) "c"
+2) "b"
+3) "a"
+127.0.0.1:6379&gt; lpush mylist x y
+(integer) 5
+127.0.0.1:6379&gt; lrange mylist 0 -1
+1) "y"
+2) "x"
+3) "c"
+4) "b"
+5) "a"
+127.0.0.1:6379&gt; linsert mylist before x java
+(integer) 6
+127.0.0.1:6379&gt; lrange mylist 0 -1
+1) "y"
+2) "java"
+3) "x"
+4) "c"
+5) "b"
+6) "a"
+127.0.0.1:6379&gt; lindex mylist -1
+"a"
+127.0.0.1:6379&gt; llen mylist
+(integer) 6
+127.0.0.1:6379&gt; lpop mylist
+"y"
+127.0.0.1:6379&gt; lpop mylist
+"java"
+127.0.0.1:6379&gt; llen mylist
+(integer) 4
+127.0.0.1:6379&gt; lrem mylist 0 x
+(integer) 1
+127.0.0.1:6379&gt; ltrim mylist 1 3
+OK
+127.0.0.1:6379&gt; lrange mylist 0 -1
+1) "b"
+2) "a"
+127.0.0.1:6379&gt; blpop mylist 3
+1) "mylist"
+2) "b"
+127.0.0.1:6379&gt; blpop mylist 3
+1) "mylist"
+2) "a"
+127.0.0.1:6379&gt; blpop mylist 3
+(nil)
+(3.00s)</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>应用场景</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>lpush+lpop=Stack(栈)</p>
+</li>
+<li>
+<p>lpush+rpop=Queue(队列)</p>
+</li>
+<li>
+<p>lpush+ltrim=Capped Collection(有限集合)</p>
+</li>
+<li>
+<p>lpush+brpop=MQ(消息队列)</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_集合set">1.5. 集合（set）</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>命令</p>
+<div class="listingblock">
+<div class="content">
+<pre>127.0.0.1:6379&gt; sadd myset a b c
+(integer) 3
+127.0.0.1:6379&gt; sadd myset a b
+(integer) 0
+127.0.0.1:6379&gt; srem myset a b
+(integer) 2
+127.0.0.1:6379&gt; srem myset hello
+(integer) 0
+127.0.0.1:6379&gt; scard myset
+(integer) 1
+127.0.0.1:6379&gt; sismember myset c
+(integer) 1
+127.0.0.1:6379&gt; srandmember myset
+"c"
+127.0.0.1:6379&gt; smembers myset
+1) "c"</pre>
+</div>
+</div>
+</li>
+<li>
+<p>使用场景</p>
+<div class="ulist">
+<ul>
+<li>
+<p>sadd=标签</p>
+</li>
+<li>
+<p>spop/srandmember=生成随机数，比如抽奖</p>
+</li>
+<li>
+<p>sadd+sinter=社交需求</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_有序集合zset">1.6. 有序集合(zset)</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>使用场景：排行榜系统</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_键管理">1.7. 键管理</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>重命名</p>
+<div class="listingblock">
+<div class="content">
+<pre>127.0.0.1:6379&gt; mset a java b lua
+OK
+127.0.0.1:6379&gt; rename a c
+OK
+127.0.0.1:6379&gt; get a
+(nil)
+127.0.0.1:6379&gt; get c
+"java"
+127.0.0.1:6379&gt; keys *
+1) "c"
+2) "myset"
+3) "b"
+127.0.0.1:6379&gt; renamenx c b
+(integer) 0</pre>
+</div>
+</div>
+</li>
+<li>
+<p>随机返回一个键</p>
+<div class="listingblock">
+<div class="content">
+<pre>127.0.0.1:6379&gt; dbsize
+(integer) 3
+127.0.0.1:6379&gt; randomkey
+"myset"
+127.0.0.1:6379&gt; randomkey
+"myset"
+127.0.0.1:6379&gt; randomkey
+"b"</pre>
+</div>
+</div>
+</li>
+<li>
+<p>键过期</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>expire expireat pexpire pexpireat pttl persist</p>
+</li>
+<li>
+<p>expire key的键不存在，返回结果为0</p>
+</li>
+<li>
+<p>对于字符串类型的键， <code>set</code> 命令会去掉过期时间，这在开发中容易被忽视</p>
+</li>
+<li>
+<p><code>setnx</code> 是 <code>set+expire</code> 的组合，是原子命令</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>遍历键</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><code>scan</code> 命令：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>127.0.0.1:6379&gt; scan 0
+1) "26"
+2)  1) "h"
+    2) "m"
+    3) "q"
+    4) "x"
+    5) "s"
+    6) "n"
+    7) "j"
+    8) "u"
+    9) "o"
+   10) "r"
+127.0.0.1:6379&gt; scan 26
+1) "19"
+2)  1) "d"
+    2) "f"
+    3) "e"
+    4) "t"
+    5) "c"
+    6) "k"
+    7) "v"
+    8) "a"
+    9) "w"
+   10) "i"
+127.0.0.1:6379&gt; scan 19
+1) "0"
+2) 1) "g"
+   2) "b"
+   3) "l"
+   4) "p"</pre>
+</div>
+</div>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>管理数据库</p>
+<div class="literalblock">
+<div class="content">
+<pre>dbsize flushall flushdb select</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_小功能大用处">2. 小功能大用处</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_慢查询">2.1. 慢查询</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>配置参数</p>
+<div class="literalblock">
+<div class="content">
+<pre>slowlog-log-slower-than: 阈值，单位微妙
+slowlog-max-len: 最大多少条日志，特殊值0：记录所有，&lt;0:任何命令不记录</pre>
+</div>
+</div>
+</li>
+<li>
+<p>慢查询命令</p>
+<div class="listingblock">
+<div class="content">
+<pre># 获取慢查询日志
+slowlog get
+# 获取慢查询日志列表当前的长度
+slowlog len
+# 慢查询日志重置
+slowlog reset</pre>
+</div>
+</div>
+</li>
+</ol>
 </div>
 </div>
 </div>
@@ -117,7 +579,7 @@ OK
 </div>
 <div id="footer">
 <div id="footer-text">
-最后更新时间 2020-06-24 01:12:18 +0800
+最后更新时间 2020-06-30 21:27:37 +0800
 </div>
 </div>
 <link rel="stylesheet" href="assets/css/coderay-asciidoctor.css">
