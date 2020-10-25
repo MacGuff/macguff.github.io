@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 abp && git checkout master
 /bin/cp -rf dist/* .
 git add .
