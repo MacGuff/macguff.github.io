@@ -3,7 +3,7 @@
 ## 安装
 
 全局安装：
-```bash
+```sh
 > npm install amberpine -g
 ```
 
@@ -87,4 +87,5 @@ $ git commit -m "publish"
 $ git push -u origin gh-pages
 ```
 现在，博客的内容已经上传到 GitHub 上，所以通过访问 macguff.github.io/blog 就可以访问博客了！
+
 (完)
