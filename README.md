@@ -1,4 +1,4 @@
-# 博客(https://macguff.github.io/)源码
+# 我的博客源码
 
 ## 如何使用
 clone至本地：`git clone -b src https://github.com/MacGuff/macguff.github.io.git`，然后参考source/first-post结构写作即可。
