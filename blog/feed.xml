@@ -4,7 +4,7 @@
         <description><![CDATA[胡思乱想]]></description>
         <link>http://macguff.github.io/</link>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Sun, 25 Oct 2020 14:46:10 GMT</lastBuildDate>
+        <lastBuildDate>Sun, 25 Oct 2020 15:20:34 GMT</lastBuildDate>
         <atom:link href="http://macguff.github.io/blog/feed.xml" rel="self" type="application/rss+xml"/>
         <item>
             <title><![CDATA[搭建博客]]></title>
@@ -62,7 +62,7 @@ $ git commit -m &quot;Ignore some files&quot;</code></pre>
 <pre><code>$ cp -r dist/* .
 $ git add .
 $ git commit -m &quot;publish&quot;</code></pre><h3 id="上传至github">上传至GitHub</h3>
-<p>现在，可以将编译好的书籍内容上传到 <code>GitHub</code> 中 blog 项目的 gh-pages 分支了</p>
+<p>现在，可以生成的静态内容上传到 <code>GitHub</code> 中 blog 项目的 gh-pages 分支了</p>
 <pre><code class="language-bash">$ git push -u origin gh-pages</code></pre>
 <p>现在，博客的内容已经上传到 GitHub 上，所以通过访问 macguff.github.io/blog 就可以访问博客了！
 (完)</p>
