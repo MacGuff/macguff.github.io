@@ -4,8 +4,22 @@
         <description><![CDATA[胡思乱想]]></description>
         <link>http://macguff.github.io/</link>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Sun, 25 Oct 2020 15:20:34 GMT</lastBuildDate>
+        <lastBuildDate>Sun, 25 Oct 2020 15:54:39 GMT</lastBuildDate>
         <atom:link href="http://macguff.github.io/blog/feed.xml" rel="self" type="application/rss+xml"/>
+        <item>
+            <title><![CDATA[关于我]]></title>
+            <description><![CDATA[<h1 id="关于我">关于我</h1>
+<h2 id="who-am-i">who am i</h2>
+<hr>
+<h2 id="where-am-i-from">where am i from</h2>
+<hr>
+<h2 id="where-will-i-go">where will i go</h2>
+]]></description>
+            <link>http://macguff.github.io/blog/post/about.html</link>
+            <guid isPermaLink="false">about</guid>
+            <dc:creator><![CDATA[macguff]]></dc:creator>
+            <pubDate>Sun, 25 Oct 2020 00:00:00 GMT</pubDate>
+        </item>
         <item>
             <title><![CDATA[搭建博客]]></title>
             <description><![CDATA[<h1 id="搭建博客">搭建博客</h1>
