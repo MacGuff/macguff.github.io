@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta content="text/html">
+    <meta charset="utf-8">
+    <meta name="author" content="作者">
+    <meta name="keywords" content="关键字1,关键字2,博客,github pages">
+    <title>我的博客 | 搭建博客</title>
+    <link href="../assets/index.css" rel="stylesheet">
+  </head>
+  <body>
+    <div id="header">
+      <h1 id="title"><a href="/">我的博客</a></h1>
+      <div class="links"><a href="http://macguff.github.io/blog/feed.xml" target="_blank">
+          <div class="iconfont icon-rss"></div></a><a href="http://github.com/macguff" target="_blank">
+          <div class="iconfont icon-github"></div></a><a href="/blog/post/about.html" target="_blank">
+          <div class="iconfont icon-author"></div></a>
+      </div>
+    </div>
+    <div id="main">
+      <div id="post">
+        <div class="main">
+          <h3 class="date">2020/10/25</h3>
+          <div><h1 id="搭建博客">搭建博客</h1>
+<h2 id="安装">安装</h2>
+<p>全局安装：</p>
+<pre><code class="language-bash">&gt; npm install amberpine -g</code></pre>
+<h2 id="初始化：">初始化：</h2>
+<pre><code class="language-sh">&gt; mkdir blog
+&gt; cd blog
+&gt; abp i</code></pre>
+<p>在当前目录生成结构：</p>
+<ol>
+<li>source 目录存放博客文章列表。</li>
+<li>assets 目录中存放静态资源，包含一个必须的 index.css 文件，可修改此文件来改变样式。</li>
+</ol>
+<h2 id="预览">预览</h2>
+<pre><code class="language-sh">&gt; abp d</code></pre>
+<p>启动本地server，访问<code>localhost:8080</code>即可预览。参考 source/first-post 目录中的 yaml 文件和 md 文件进行写作，文章编辑保存时，浏览器会自动刷新以体现最新的进展。</p>
+<h2 id="构建">构建</h2>
+<pre><code>&gt; abp</code></pre><p>执行此命令将在 dist 目录下生成完整的站点，包含一个首页 index.html 和每篇文章的一个 html 页。目录树如下：</p>
+<pre><code class="language-sh">.
+├── assets
+│   ├── index.css
+│   └── lanscape.jpg
+├── dist
+│   ├── blog
+│   └── index.html
+└── source
+    ├── 1
+    ├── blog.yaml
+    └── first-post</code></pre>
+<h2 id="发布">发布</h2>
+<p>一般情况下，将 dist 目录作为根目录完整地发布到任何静态文件服务器即可。这里使用<code>github-pages</code>服务。</p>
+<h3 id="新建github仓库">新建github仓库</h3>
+<p>在GitHub新建一个托管博客的仓库，这里命名为<code>blog</code>。</p>
+<p>github-pages要求将静态文件内容放在仓库的<code>gh-pages</code>分支，才可访问到。所以，blog项目有两个分支：</p>
+<ul>
+<li>master, 保存博客的源码</li>
+<li>gh-pages, 保存生成的html文件</li>
+</ul>
+<p>可通过如下地址访问：</p>
+<pre><code>&lt;username&gt;.github.io/&lt;project&gt;</code></pre><p>这里的<code>&lt;username&gt;</code>填你的github帐号名，<code>&lt;project&gt;</code>填项目名。比如本博客可访问地址为：
+<code>macguff.github.io/blog</code>。</p>
+<h3 id="创建gh-pages分支">创建gh-pages分支</h3>
+<p>执行如下命令来创建分支，并且删除不需要的文件：</p>
+<pre><code class="language-sh">$ git checkout --orphan gh-pages
+$ git rm --cached -r .
+$ git clean -df</code></pre>
+<p>现在，目录下应该只剩下 <code>dist</code> 目录了，首先，忽略一些文件：</p>
+<pre><code class="language-sh">$ echo &quot;dist&quot; &gt;&gt; .gitignore
+$ git add .gitignore
+$ git commit -m &quot;Ignore some files&quot;</code></pre>
+<p>然后，加入 dist 下的内容到分支中</p>
+<pre><code>$ cp -r dist/* .
+$ git add .
+$ git commit -m &quot;publish&quot;</code></pre><h3 id="上传至github">上传至GitHub</h3>
+<p>现在，可以将编译好的书籍内容上传到 <code>GitHub</code> 中 blog 项目的 gh-pages 分支了</p>
+<pre><code class="language-bash">$ git push -u origin gh-pages</code></pre>
+<p>现在，博客的内容已经上传到 GitHub 上，所以通过访问 macguff.github.io/blog 就可以访问博客了！
+(完)</p>
+</div>
+        </div>
+      </div>
+    </div>
+    <link rel="stylesheet" href="https://yandex.st/highlightjs/8.0/styles/tomorrow.min.css">
+    <script type="text/javascript" src="https://g.alicdn.com/atastatic/s/MathJax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script>
+      MathJax.Hub.Config({
+          jax: ["input/TeX","output/HTML-CSS"],
+          displayIndent: "2em",
+          tex2jax: {
+              inlineMath: [['$','$'], ['\\(','\\)']],
+              processEscapes: true
+          },
+          "HTML-CSS": {
+              linebreaks: {
+                  automatic: true
+              },
+              scale: 100
+          },
+          SVG: {
+              linebreaks: {
+                  automatic: true
+              }
+          },
+          displayAlign: "left"
+      });
+    </script>
+  </body>
+</html>

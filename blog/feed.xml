@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title><![CDATA[我的博客]]></title>
+        <description><![CDATA[博客的描述，签名，箴言]]></description>
+        <link>http://macguff.github.io/</link>
+        <generator>RSS for Node</generator>
+        <lastBuildDate>Sun, 25 Oct 2020 14:23:04 GMT</lastBuildDate>
+        <atom:link href="http://macguff.github.io/blog/feed.xml" rel="self" type="application/rss+xml"/>
+        <item>
+            <title><![CDATA[搭建博客]]></title>
+            <description><![CDATA[<h1 id="搭建博客">搭建博客</h1>
+<h2 id="安装">安装</h2>
+<p>全局安装：</p>
+<pre><code class="language-bash">&gt; npm install amberpine -g</code></pre>
+<h2 id="初始化：">初始化：</h2>
+<pre><code class="language-sh">&gt; mkdir blog
+&gt; cd blog
+&gt; abp i</code></pre>
+<p>在当前目录生成结构：</p>
+<ol>
+<li>source 目录存放博客文章列表。</li>
+<li>assets 目录中存放静态资源，包含一个必须的 index.css 文件，可修改此文件来改变样式。</li>
+</ol>
+<h2 id="预览">预览</h2>
+<pre><code class="language-sh">&gt; abp d</code></pre>
+<p>启动本地server，访问<code>localhost:8080</code>即可预览。参考 source/first-post 目录中的 yaml 文件和 md 文件进行写作，文章编辑保存时，浏览器会自动刷新以体现最新的进展。</p>
+<h2 id="构建">构建</h2>
+<pre><code>&gt; abp</code></pre><p>执行此命令将在 dist 目录下生成完整的站点，包含一个首页 index.html 和每篇文章的一个 html 页。目录树如下：</p>
+<pre><code class="language-sh">.
+├── assets
+│   ├── index.css
+│   └── lanscape.jpg
+├── dist
+│   ├── blog
+│   └── index.html
+└── source
+    ├── 1
+    ├── blog.yaml
+    └── first-post</code></pre>
+<h2 id="发布">发布</h2>
+<p>一般情况下，将 dist 目录作为根目录完整地发布到任何静态文件服务器即可。这里使用<code>github-pages</code>服务。</p>
+<h3 id="新建github仓库">新建github仓库</h3>
+<p>在GitHub新建一个托管博客的仓库，这里命名为<code>blog</code>。</p>
+<p>github-pages要求将静态文件内容放在仓库的<code>gh-pages</code>分支，才可访问到。所以，blog项目有两个分支：</p>
+<ul>
+<li>master, 保存博客的源码</li>
+<li>gh-pages, 保存生成的html文件</li>
+</ul>
+<p>可通过如下地址访问：</p>
+<pre><code>&lt;username&gt;.github.io/&lt;project&gt;</code></pre><p>这里的<code>&lt;username&gt;</code>填你的github帐号名，<code>&lt;project&gt;</code>填项目名。比如本博客可访问地址为：
+<code>macguff.github.io/blog</code>。</p>
+<h3 id="创建gh-pages分支">创建gh-pages分支</h3>
+<p>执行如下命令来创建分支，并且删除不需要的文件：</p>
+<pre><code class="language-sh">$ git checkout --orphan gh-pages
+$ git rm --cached -r .
+$ git clean -df</code></pre>
+<p>现在，目录下应该只剩下 <code>dist</code> 目录了，首先，忽略一些文件：</p>
+<pre><code class="language-sh">$ echo &quot;dist&quot; &gt;&gt; .gitignore
+$ git add .gitignore
+$ git commit -m &quot;Ignore some files&quot;</code></pre>
+<p>然后，加入 dist 下的内容到分支中</p>
+<pre><code>$ cp -r dist/* .
+$ git add .
+$ git commit -m &quot;publish&quot;</code></pre><h3 id="上传至github">上传至GitHub</h3>
+<p>现在，可以将编译好的书籍内容上传到 <code>GitHub</code> 中 blog 项目的 gh-pages 分支了</p>
+<pre><code class="language-bash">$ git push -u origin gh-pages</code></pre>
+<p>现在，博客的内容已经上传到 GitHub 上，所以通过访问 macguff.github.io/blog 就可以访问博客了！
+(完)</p>
+]]></description>
+            <link>http://macguff.github.io/blog/post/1.html</link>
+            <guid isPermaLink="false">1</guid>
+            <dc:creator><![CDATA[作者]]></dc:creator>
+            <pubDate>Sun, 25 Oct 2020 00:00:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[第一篇文章]]></title>
+            <description><![CDATA[<h1 id="第一篇文章">第一篇文章</h1>
+<p>这是我的第一篇博客文章，写点什么好呢？</p>
+<p>来一张美丽的风景照片吧。</p>
+<p><img src="../assets/lanscape.jpg" alt=""></p>
+<blockquote>
+<p>这张图在 assets 目录下。当然，你也可以使用自己的图床。</p>
+</blockquote>
+<p>写一段代码（支持所有主流语言的高亮显示）：</p>
+<pre><code class="language-cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio&gt;</span></span>
+
+<span class="hljs-function"><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>
+
+<span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
+    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"hello world!"</span> &lt;&lt; <span class="hljs-built_in">endl</span>;
+}</code></pre>
+<p>或者，写一段数学公式：</p>
+<p>\begin{equation}\begin{matrix}x&#39;=x\cos\theta-y\sin\theta\newline y&#39;=x\sin\theta+y\sin\theta\end{matrix}\end{equation}</p>
+<p>对样式不满意，可以在 <code>assets/index.css</code> 文件中自行定义。</p>
+<p>有任何使用问题，可以<a href="https://github.com/xieguanglei/amberpine/issues/new">提issue</a>过来。</p>
+]]></description>
+            <link>http://macguff.github.io/blog/post/first-post.html</link>
+            <guid isPermaLink="false">first-post</guid>
+            <dc:creator><![CDATA[作者]]></dc:creator>
+            <pubDate>Sat, 01 Jan 2000 00:00:00 GMT</pubDate>
+        </item>
+    </channel>
+</rss>

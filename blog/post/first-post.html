@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta content="text/html">
+    <meta charset="utf-8">
+    <meta name="author" content="作者">
+    <meta name="keywords" content="关键字1,关键字2,博客,github pages,关键词3,关键词4">
+    <title>我的博客 | 第一篇文章</title>
+    <link href="../assets/index.css" rel="stylesheet">
+  </head>
+  <body>
+    <div id="header">
+      <h1 id="title"><a href="/">我的博客</a></h1>
+      <div class="links"><a href="http://macguff.github.io/blog/feed.xml" target="_blank">
+          <div class="iconfont icon-rss"></div></a><a href="http://github.com/macguff" target="_blank">
+          <div class="iconfont icon-github"></div></a><a href="/blog/post/about.html" target="_blank">
+          <div class="iconfont icon-author"></div></a>
+      </div>
+    </div>
+    <div id="main">
+      <div id="post">
+        <div class="main">
+          <h3 class="date">2000/01/01</h3>
+          <div><h1 id="第一篇文章">第一篇文章</h1>
+<p>这是我的第一篇博客文章，写点什么好呢？</p>
+<p>来一张美丽的风景照片吧。</p>
+<p><img src="../assets/lanscape.jpg" alt=""></p>
+<blockquote>
+<p>这张图在 assets 目录下。当然，你也可以使用自己的图床。</p>
+</blockquote>
+<p>写一段代码（支持所有主流语言的高亮显示）：</p>
+<pre><code class="language-cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio&gt;</span></span>
+
+<span class="hljs-function"><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>
+
+<span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
+    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"hello world!"</span> &lt;&lt; <span class="hljs-built_in">endl</span>;
+}</code></pre>
+<p>或者，写一段数学公式：</p>
+<p>\begin{equation}\begin{matrix}x&#39;=x\cos\theta-y\sin\theta\newline y&#39;=x\sin\theta+y\sin\theta\end{matrix}\end{equation}</p>
+<p>对样式不满意，可以在 <code>assets/index.css</code> 文件中自行定义。</p>
+<p>有任何使用问题，可以<a href="https://github.com/xieguanglei/amberpine/issues/new">提issue</a>过来。</p>
+</div>
+        </div>
+      </div>
+    </div>
+    <link rel="stylesheet" href="https://yandex.st/highlightjs/8.0/styles/tomorrow.min.css">
+    <script type="text/javascript" src="https://g.alicdn.com/atastatic/s/MathJax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script>
+      MathJax.Hub.Config({
+          jax: ["input/TeX","output/HTML-CSS"],
+          displayIndent: "2em",
+          tex2jax: {
+              inlineMath: [['$','$'], ['\\(','\\)']],
+              processEscapes: true
+          },
+          "HTML-CSS": {
+              linebreaks: {
+                  automatic: true
+              },
+              scale: 100
+          },
+          SVG: {
+              linebreaks: {
+                  automatic: true
+              }
+          },
+          displayAlign: "left"
+      });
+    </script>
+  </body>
+</html>
