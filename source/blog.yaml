@@ -1,9 +1,9 @@
-title: 我的博客
-description: 博客的描述，签名，箴言
+title: macguff's blog
+description: 胡思乱想
 keywords:
   - 关键字1
   - 关键字2
-author: 作者
+author: macguff
 url: http://macguff.github.io/ # 网站地址，如果设置了 RSS 输出，将影响
 
 links:
