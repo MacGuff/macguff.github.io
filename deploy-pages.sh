@@ -10,3 +10,4 @@ git push origin master
 
 [ $? -eq 0 ] && echo "部署至gh-pages成功！"
 git checkout src
+git push origin src
