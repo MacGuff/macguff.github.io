@@ -82,7 +82,7 @@ $ git commit -m "publish"
 ```
 
 ### 上传至GitHub
-现在，可以将编译好的书籍内容上传到 `GitHub` 中 blog 项目的 gh-pages 分支了
+现在，可以生成的静态内容上传到 `GitHub` 中 blog 项目的 gh-pages 分支了
 ```bash
 $ git push -u origin gh-pages
 ```
