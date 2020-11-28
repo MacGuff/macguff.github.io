@@ -4,8 +4,23 @@
         <description><![CDATA[胡思乱想]]></description>
         <link>http://macguff.github.io/</link>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Sun, 25 Oct 2020 16:12:50 GMT</lastBuildDate>
+        <lastBuildDate>Sat, 28 Nov 2020 19:06:03 GMT</lastBuildDate>
         <atom:link href="http://macguff.github.io/blog/feed.xml" rel="self" type="application/rss+xml"/>
+        <item>
+            <title><![CDATA[收藏]]></title>
+            <description><![CDATA[<h1 id="收藏">收藏</h1>
+<ol>
+<li><a href="http://blog.code-cop.org/2020/05/learning-yet-another-programming.html">Learning yet another Programming Language</a><blockquote>
+<p>学习编程语言的方法论</p>
+</blockquote>
+</li>
+</ol>
+]]></description>
+            <link>http://macguff.github.io/blog/post/digest.html</link>
+            <guid isPermaLink="false">digest</guid>
+            <dc:creator><![CDATA[macguff]]></dc:creator>
+            <pubDate>Sun, 29 Nov 2020 00:00:00 GMT</pubDate>
+        </item>
         <item>
             <title><![CDATA[搭建博客]]></title>
             <description><![CDATA[<h1 id="搭建博客">搭建博客</h1>
