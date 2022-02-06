@@ -1,29 +1,27 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
-    <channel>
-        <title><![CDATA[macguff's blog]]></title>
-        <description><![CDATA[胡思乱想]]></description>
-        <link>http://macguff.github.io/</link>
-        <generator>RSS for Node</generator>
-        <lastBuildDate>Sun, 06 Feb 2022 14:26:25 GMT</lastBuildDate>
-        <atom:link href="http://macguff.github.io/blog/feed.xml" rel="self" type="application/rss+xml"/>
-        <item>
-            <title><![CDATA[收藏]]></title>
-            <description><![CDATA[<h1 id="收藏">收藏</h1>
-<ol>
-<li><a href="http://blog.code-cop.org/2020/05/learning-yet-another-programming.html">Learning yet another Programming Language</a><blockquote>
-<p>学习编程语言的方法论</p>
-</blockquote>
-</li>
-</ol>
-]]></description>
-            <link>http://macguff.github.io/blog/post/digest.html</link>
-            <guid isPermaLink="false">digest</guid>
-            <dc:creator><![CDATA[macguff]]></dc:creator>
-            <pubDate>Sun, 29 Nov 2020 00:00:00 GMT</pubDate>
-        </item>
-        <item>
-            <title><![CDATA[搭建博客]]></title>
-            <description><![CDATA[<h1 id="搭建博客">搭建博客</h1>
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta content="text/html">
+    <meta charset="utf-8">
+    <meta name="author" content="macguff">
+    <meta name="keywords" content="关键字1,关键字2,,博客,github pages">
+    <title>macguff's blog | 搭建博客</title>
+    <link href="../assets/index.css" rel="stylesheet">
+  </head>
+  <body>
+    <div id="header">
+      <h1 id="title"><a href="/">macguff's blog</a></h1>
+      <div class="links"><a href="http://macguff.github.io/blog/feed.xml" target="_blank">
+          <div class="iconfont icon-rss"></div></a><a href="http://github.com/macguff" target="_blank">
+          <div class="iconfont icon-github"></div></a><a href="/blog/post/about.html" target="_blank">
+          <div class="iconfont icon-author"></div></a>
+      </div>
+    </div>
+    <div id="main">
+      <div id="post">
+        <div class="main">
+          <h3 class="date">2020/10/25</h3>
+          <div><h1 id="搭建博客">搭建博客</h1>
 <h2 id="安装">安装</h2>
 <p>全局安装：</p>
 <pre><code class="language-sh">&gt; npm install amberpine -g</code></pre>
@@ -81,11 +79,33 @@ $ git commit -m &quot;publish&quot;</code></pre><h3 id="上传至github">上传�
 <pre><code class="language-bash">$ git push -u origin gh-pages</code></pre>
 <p>现在，博客的内容已经上传到 GitHub 上，所以通过访问 macguff.github.io/blog 就可以访问博客了！</p>
 <p>(完)</p>
-]]></description>
-            <link>http://macguff.github.io/blog/post/hello.html</link>
-            <guid isPermaLink="false">hello</guid>
-            <dc:creator><![CDATA[macguff]]></dc:creator>
-            <pubDate>Sun, 25 Oct 2020 00:00:00 GMT</pubDate>
-        </item>
-    </channel>
-</rss>
+</div>
+        </div>
+      </div>
+    </div>
+    <link rel="stylesheet" href="https://yandex.st/highlightjs/8.0/styles/tomorrow.min.css">
+    <script type="text/javascript" src="https://g.alicdn.com/atastatic/s/MathJax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script>
+      MathJax.Hub.Config({
+          jax: ["input/TeX","output/HTML-CSS"],
+          displayIndent: "2em",
+          tex2jax: {
+              inlineMath: [['$','$'], ['\\(','\\)']],
+              processEscapes: true
+          },
+          "HTML-CSS": {
+              linebreaks: {
+                  automatic: true
+              },
+              scale: 100
+          },
+          SVG: {
+              linebreaks: {
+                  automatic: true
+              }
+          },
+          displayAlign: "left"
+      });
+    </script>
+  </body>
+</html>
