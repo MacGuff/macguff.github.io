@@ -2,6 +2,7 @@
 
 set -e
 
+git add . && git commit -m "new post"
 abp && git checkout master
 /bin/cp -rf dist/* .
 git add .
